@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.*
+!.env.example
+!.env.production.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Local upload fallback (dev stub)
+uploads/
+
+# Runtime / build
+dist/
+coverage/
+.nyc_output/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp

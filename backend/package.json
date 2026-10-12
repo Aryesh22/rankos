@@ -1,0 +1,66 @@
+{
+  "name": "rankos-backend",
+  "version": "0.1.0",
+  "description": "RankOS backend — production-grade Node/Express/MongoDB foundation.",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "seed": "node src/seeds/index.js",
+    "test": "node --test \"src/tests/**/*.test.js\"",
+    "lint": "eslint .",
+    "format": "prettier --write \"src/**/*.js\"",
+    "docker:build": "docker build -t rankos-backend .",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down"
+  },
+  "keywords": [
+    "rankos",
+    "express",
+    "mongodb",
+    "backend"
+  ],
+  "author": "RankOS",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bullmq": "^5.34.0",
+    "cloudinary": "^2.5.1",
+    "compression": "^1.7.5",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "ioredis": "^5.4.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "morgan": "^1.10.0",
+    "multer": "^2.2.0",
+    "nodemailer": "^9.0.3",
+    "rate-limit-redis": "^4.2.0",
+    "socket.io": "^4.8.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "eslint": "^9.18.0",
+    "mongodb-memory-server": "^11.2.0",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.4.2",
+    "supertest": "^7.0.0"
+  },
+  "overrides": {
+    "brace-expansion": "5.0.8",
+    "tar": "7.5.22"
+  }
+}

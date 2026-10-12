@@ -1,0 +1,58 @@
+# Local development stack: API + MongoDB + Redis.
+# For production you can drop the `mongo` service and point MONGODB_URI at Atlas.
+
+services:
+  api:
+    build: .
+    container_name: rankos-api
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8080}:8080"
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      PORT: 8080
+      API_PREFIX: /api
+      # Point at the compose services by their service names.
+      MONGODB_URI: mongodb://mongo:27017/rankos
+      REDIS_URL: redis://redis:6379
+      CORS_ORIGIN: ${CORS_ORIGIN:-*}
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    # Uncomment for live-reload dev (also switch CMD to `npm run dev`):
+    # volumes:
+    #   - ./src:/app/src
+
+  mongo:
+    image: mongo:7
+    container_name: rankos-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: rankos-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mongo_data:
+  redis_data:
